@@ -250,9 +250,10 @@
         document.getElementById('iosButton').addEventListener('click', function () {
             const platform = getPlatform();
             if (platform === 'iOS') {
+                showModal('This app is coming soon for iOS!');
                 // Redirect to the iOS app download link (replace with your Google Drive direct download link)
-                const iosFileUrl = 'https://drive.google.com/uc?export=download&id=1m1DQj-5-_LdKVHMUqlljmsCi62dt_77Y';
-                window.location.href = iosFileUrl;
+                //const iosFileUrl = 'https://drive.google.com/uc?export=download&id=1m1DQj-5-_LdKVHMUqlljmsCi62dt_77Y';
+                //window.location.href = iosFileUrl;
             } else {
                 showModal('This app is only available for download on iOS devices.');
             }
