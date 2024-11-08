@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxor777</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/Users/christmasbasnet/Downloads/imgs/background.jpg');
+            background-size: cover;
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            height: 100vh;
+            /* Ensures body takes the full height of the viewport */
+        }
+
+        .title {
+            font-family: 'Roboto', sans-serif;
+            /* Modern, clean font */
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #FFD700;
+            /* Gold color for the casino feel */
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 215, 0, 0.8), 0 0 5px rgba(255, 215, 0, 0.8);
+            margin-top: 20px;
+            padding: 0 20px;
+            /* Adds space on the left and right */
+            z-index: 2;
+            /* Ensures the title is above other elements */
+            letter-spacing: 2px;
+            /* Adds spacing between letters */
+            text-transform: uppercase;
+            /* Uppercase for prominence */
+            text-align: center;
+            /* Keeps text centered */
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            /* Increase gap between buttons */
+            flex-wrap: wrap;
+            margin-top: 30px;
+            position: relative;
+            z-index: 2;
+            /* Ensures buttons are above background image */
+        }
+
+        .button {
+            width: 300px;
+            height: 110px;
+            background-image: url('/Users/christmasbasnet/Downloads/imgs/LargeButton03Yellow_n.png');
+            background-size: 100% auto;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.5rem;
+            border-radius: 30px;
+            position: relative;
+            /* Make the button the reference for absolute positioning */
+        }
+
+        /* Specific background positions for each button */
+        .button.android {
+            background-position: 0 0;
+            /* Position of "ANDROID" button in sprite */
+        }
+
+        .button.ios-1 {
+            background-position: 0 0;
+            /* Adjust based on new button height */
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        .logo {
+            margin: 30px 0;
+            font-size: 2.5rem;
+        }
+
+        .hot-badge {
+            background: red;
+            color: white;
+            font-size: 0.9rem;
+            padding: 3px 7px;
+            border-radius: 12px;
+            position: absolute;
+            /* Position the badge relative to the button */
+            top: 5px;
+            /* Adjust the distance from the top */
+            right: 5px;
+            /* Adjust the distance from the right */
+            z-index: 2;
+            /* Make sure the badge stays above other elements inside the button */
+        }
+
+        .bottom-image {
+            position: fixed;
+            top: 100px;
+            /* Align the image to the top of the page */
+            left: 50%;
+            transform: translateX(-50%);
+            /* Centers the image horizontally */
+            width: 40vw;
+            /* Width is 40% of the viewport width */
+            min-width: 450px;
+            /* Minimum width to prevent it from getting too small */
+            z-index: 1;
+            /* Keeps the image behind other elements */
+        }
+
+        .model-image {
+            position: fixed;
+            /* This positions the image relative to the viewport */
+            bottom: 0;
+            /* Align the image to the bottom of the viewport */
+            left: 70%;
+            transform: translateX(-50%);
+            /* Centers the image horizontally */
+            width: 40vw;
+            /* Width is 40% of the viewport width */
+            min-width: 550px;
+            /* Minimum width to prevent it from getting too small */
+            z-index: 1;
+            /* Ensures it's above other elements */
+        }
+
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Semi-transparent background */
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .modal-content {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            color: white;
+        }
+
+        .modal-content p {
+            margin: 0 0 20px;
+            font-size: 1.2rem;
+        }
+
+        .close-btn {
+            background-color: #FFD700;
+            /* Gold color */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background-color: #e6c200;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="title">Click To Install APP</h1>
+    </div>
+
+    <div class="buttons">
+        <div class="button android" id="androidButton">ANDROID</div>
+        <div class="button ios-1" id="iosButton">IOS<span class="hot-badge">Coming Soon!</span></div>
+    </div>
+
+    <img src="/Users/christmasbasnet/Downloads/imgs/icon1.png" alt="Wheel Image" class="bottom-image">
+    <img src="/Users/christmasbasnet/Downloads/imgs/model.png" alt="Model Image" class="model-image">
+
+    <!-- Modal Structure -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <p id="modalMessage"></p>
+            <button class="close-btn" id="closeBtn">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to detect the platform
+        function getPlatform() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            if (/android/i.test(userAgent)) {
+                return 'Android';
+            }
+
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                return 'iOS';
+            }
+
+            return 'unknown';
+        }
+
+        // Show modal function
+        function showModal(message) {
+            const modal = document.getElementById('modal');
+            const modalMessage = document.getElementById('modalMessage');
+            modalMessage.textContent = message;
+            modal.style.display = 'flex';
+        }
+
+        // Close modal function
+        document.getElementById('closeBtn').addEventListener('click', function () {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        });
+
+        // Event listeners for Android and iOS buttons
+        document.getElementById('androidButton').addEventListener('click', function () {
+            const platform = getPlatform();
+            if (platform === 'Android') {
+                // Redirect to the Android app download link (replace with your Google Drive direct download link)
+                const androidFileUrl = 'https://drive.google.com/uc?export=download&id=1m1DQj-5-_LdKVHMUqlljmsCi62dt_77Y';
+                window.location.href = androidFileUrl;
+            } else {
+                showModal('This app is only available for download on Android devices.');
+            }
+        });
+
+        document.getElementById('iosButton').addEventListener('click', function () {
+            const platform = getPlatform();
+            if (platform === 'iOS') {
+                // Redirect to the iOS app download link (replace with your Google Drive direct download link)
+                const iosFileUrl = 'https://drive.google.com/uc?export=download&id=1m1DQj-5-_LdKVHMUqlljmsCi62dt_77Y';
+                window.location.href = iosFileUrl;
+            } else {
+                showModal('This app is only available for download on iOS devices.');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
