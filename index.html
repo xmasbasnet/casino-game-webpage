@@ -22,70 +22,87 @@
 
         .title {
             font-family: 'Roboto', sans-serif;
-            /* Modern, clean font */
             font-size: 2.5rem;
             font-weight: bold;
             color: #FFD700;
-            /* Gold color for the casino feel */
             text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 215, 0, 0.8), 0 0 5px rgba(255, 215, 0, 0.8);
             margin-top: 20px;
             padding: 0 20px;
-            /* Adds space on the left and right */
             z-index: 2;
-            /* Ensures the title is above other elements */
             letter-spacing: 2px;
-            /* Adds spacing between letters */
             text-transform: uppercase;
-            /* Uppercase for prominence */
             text-align: center;
-            /* Keeps text centered */
         }
 
         .buttons {
             display: flex;
             justify-content: center;
             gap: 25px;
-            /* Increase gap between buttons */
             flex-wrap: wrap;
             margin-top: 30px;
             position: relative;
             z-index: 2;
-            /* Ensures buttons are above background image */
         }
 
         .button {
-    width: 300px;
-    height: 110px;
-    background-image: url('http://luxor777.win/imgs/LargeButton03Yellow_n.png');
-    background-size: 100% auto;
-    cursor: pointer;
-    transition: transform 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: white;
-    font-size: 1.5rem;
-    border-radius: 30px;
-    position: relative;
-    user-select: none; /* Prevent text selection */
-    outline: none; /* Remove outline on button click */
-    -webkit-tap-highlight-color: transparent; /* Removes highlight on mobile devices */
-}
+            width: 300px;
+            height: 110px;
+            background-image: url('http://luxor777.win/imgs/LargeButton03Yellow_n.png');
+            background-size: 100% auto;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.5rem;
+            border-radius: 30px;
+            position: relative;
+            user-select: none; /* Prevent text selection */
+            outline: none; /* Remove outline on button click */
+            -webkit-tap-highlight-color: transparent; /* Removes highlight on mobile devices */
+        }
 
-        /* Specific background positions for each button */
         .button.android {
             background-position: 0 0;
-            /* Position of "ANDROID" button in sprite */
         }
 
         .button.ios-1 {
             background-position: 0 0;
-            /* Adjust based on new button height */
         }
 
         .button:hover {
             transform: scale(1.1);
+        }
+
+        /* Wobble effect */
+        @keyframes wobble {
+            0% {
+                transform: rotate(0deg);
+            }
+            15% {
+                transform: rotate(10deg);
+            }
+            30% {
+                transform: rotate(-10deg);
+            }
+            45% {
+                transform: rotate(5deg);
+            }
+            60% {
+                transform: rotate(-5deg);
+            }
+            75% {
+                transform: rotate(2deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .button:active {
+            animation: wobble 0.6s ease; /* Apply the wobble animation when the button is pressed */
         }
 
         .logo {
@@ -100,56 +117,39 @@
             padding: 3px 7px;
             border-radius: 12px;
             position: absolute;
-            /* Position the badge relative to the button */
             top: 5px;
-            /* Adjust the distance from the top */
             right: 5px;
-            /* Adjust the distance from the right */
             z-index: 2;
-            /* Make sure the badge stays above other elements inside the button */
         }
 
         .bottom-image {
             position: fixed;
             top: 100px;
-            /* Align the image to the top of the page */
             left: 50%;
             transform: translateX(-50%);
-            /* Centers the image horizontally */
             width: 40vw;
-            /* Width is 40% of the viewport width */
             min-width: 450px;
-            /* Minimum width to prevent it from getting too small */
             z-index: 1;
-            /* Keeps the image behind other elements */
         }
 
         .model-image {
             position: fixed;
-            /* This positions the image relative to the viewport */
             bottom: 0;
-            /* Align the image to the bottom of the viewport */
             left: 70%;
             transform: translateX(-50%);
-            /* Centers the image horizontally */
             width: 40vw;
-            /* Width is 40% of the viewport width */
             min-width: 550px;
-            /* Minimum width to prevent it from getting too small */
             z-index: 1;
-            /* Ensures it's above other elements */
         }
 
         .modal {
             display: none;
-            /* Hidden by default */
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
-            /* Semi-transparent background */
             justify-content: center;
             align-items: center;
             z-index: 10;
@@ -172,7 +172,6 @@
 
         .close-btn {
             background-color: #FFD700;
-            /* Gold color */
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
@@ -253,9 +252,6 @@
             const platform = getPlatform();
             if (platform === 'iOS') {
                 showModal('This app is coming soon for iOS!');
-                // Redirect to the iOS app download link (replace with your Google Drive direct download link)
-                //const iosFileUrl = 'https://drive.google.com/uc?export=download&id=1m1DQj-5-_LdKVHMUqlljmsCi62dt_77Y';
-                //window.location.href = iosFileUrl;
             } else {
                 showModal('This app is only available for download on iOS devices.');
             }
